@@ -16,10 +16,10 @@ export default class TodoService {
     db.on('populate', async () => {
       console.log('It runs only once!');
       await db.tasks.bulkPut([
-        { description: 'Learn JavaScript', done: false },
+        { description: 'Learn JavaScript', done: true },
         { description: 'Learn TypeScript', done: false },
         { description: 'Learn PWA', done: false },
-        { description: 'Learn Java', done: false }
+        { description: 'Learn Java', done: true }
       ]);
     });
   }
