@@ -1,7 +1,9 @@
 export default class HtmlService {
 
-  constructor() {
+  constructor(todoService) {
+    this.todoService = todoService;
     this.bindFormEvent();
+    this.listTasks();
   }
 
   bindFormEvent() {
@@ -11,5 +13,10 @@ export default class HtmlService {
       console.log(form.item.value);
       form.reset();
     })
+  }
+
+  async listTasks() {
+    const tasks = await this.todoService.getAll();
+    console.log(tasks);
   }
 }
