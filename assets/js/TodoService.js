@@ -1,29 +1,30 @@
-const db = new Dexie('todoDB');
+let db;
 
-db.version(1).stores({
-  tasks: '++id,description,done'
-});
+export default class TodoService {
 
-db.on('populate', async () => {
-  console.log('It runs only once!');
-  await db.tasks.bulkPut([
-    { description: 'Learn JavaScript', done: false },
-    { description: 'Learn TypeScript', done: false },
-    { description: 'Learn PWA', done: false },
-    { description: 'Learn Java', done: false }
-  ]);
-});
+  constructor() {
+    this.initializeDB();
+  }
 
-async function list() {
-  db.tasks.each(task => console.log(task));
+  initializeDB() {
+    db = new Dexie('todoDB');
 
-  const taskTypeScript = await db.tasks.get(2);
-  taskTypeScript.done = true;
-  db.tasks.put(taskTypeScript);
+    db.version(1).stores({
+      tasks: '++id,description'
+    });
 
-  const tasksDone = await db.tasks
-    .where('description').equals('Learn Java').first();
-  console.log('Query', tasksDone);
+    db.on('populate', async () => {
+      console.log('It runs only once!');
+      await db.tasks.bulkPut([
+        { description: 'Learn JavaScript', done: false },
+        { description: 'Learn TypeScript', done: false },
+        { description: 'Learn PWA', done: false },
+        { description: 'Learn Java', done: false }
+      ]);
+    });
+  }
+
+  getAll() {
+    return db.tasks.toArray();
+  }
 }
-
-list();
