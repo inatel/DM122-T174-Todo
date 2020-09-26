@@ -12,9 +12,16 @@ export default class HtmlService {
     const form = document.querySelector('form');
     form.addEventListener('submit', event => {
       event.preventDefault();
-      console.log(form.item.value);
+      this.addTask(form.item.value);
       form.reset();
     })
+  }
+
+  async addTask(description) {
+    const task = { description, done: false };
+    const taskId = await this.todoService.save(task);
+    task.id = taskId;
+    this.addToHtmlList(task);
   }
 
   async listTasks() {
@@ -57,6 +64,3 @@ export default class HtmlService {
     ul.appendChild(li);
   }
 }
-
-    li.addEventListener('click', () => this.toggleTask(li));
-
