@@ -42,6 +42,12 @@ export default class HtmlService {
     this.saveTask(taskId, isDone);
   }
 
+  async deleteTask(li) {
+    const taskId = +li.getAttribute('data-item-id');
+    await this.todoService.delete(taskId);
+    li.remove();
+  }
+
   addToHtmlList(task) {
     const ul = document.querySelector('ul');
     const li = document.createElement('li');
@@ -54,6 +60,10 @@ export default class HtmlService {
     span.textContent = task.description;
 
     button.textContent = 'x';
+    button.addEventListener('click', event => {
+      event.stopPropagation();
+      this.deleteTask(li);
+    });
 
     if (task.done) {
       li.classList.add(DONE);
