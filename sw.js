@@ -5,7 +5,7 @@ const assetsToCache = [
   'https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
   'https://fonts.googleapis.com/css?family=Roboto:400,700',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
-  'https://unpkg.com/dexie@3.0.2/dist/dexie.min.js',
+  'https://cdn.jsdelivr.net/npm/dexie@3.0.2/dist/dexie.mjs',
   './assets/js/material.min.js',
   './assets/css/style.css',
   './assets/js/TodoService.js',

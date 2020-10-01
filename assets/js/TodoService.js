@@ -1,3 +1,5 @@
+import Dexie from 'https://cdn.jsdelivr.net/npm/dexie@3.0.2/dist/dexie.mjs';
+
 let db;
 
 export default class TodoService {
